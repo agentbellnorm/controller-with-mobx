@@ -24,7 +24,7 @@ function Todo({ store }: TodoProps) {
                     </li>
                 ))}
             </ul>
-{            <TodoHistory store={store}/>}
+            <TodoHistory store={store}/>
         </>);
 }
 

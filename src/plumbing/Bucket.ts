@@ -1,4 +1,4 @@
-import { makeAutoObservable, autorun, action, runInAction} from 'mobx';
+import { makeAutoObservable, autorun, runInAction} from 'mobx';
 
 export default class Bucket<T> {
     state!: T; 
@@ -10,7 +10,6 @@ export default class Bucket<T> {
         });
     }
 
-    @action
     reset(newValue: T): T {
         this.state = newValue;
         return this.state;
@@ -24,6 +23,7 @@ export default class Bucket<T> {
         return this.state;
     }
 
+    // TODO not working..
     onChange(listener: (state: T) => void) {
         autorun(() => listener(this.state));
     }

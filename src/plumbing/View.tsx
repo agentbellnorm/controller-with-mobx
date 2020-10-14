@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Bucket from "./Bucket"
-import { observer } from 'mobx-react';
+import magic from './Magic';
 
 interface Props {
     state: any;
@@ -9,11 +9,12 @@ interface Props {
 }
 
 const viewMaker = ({ store, Component }: { store: Bucket<any>, Component: any }) => {
-    const Wrapped = observer(Component);
+    const MagicComponent = magic(Component);
+    
     return {
         mount: (id: string) => {
             ReactDOM.render(
-                <Wrapped store={store} />,
+                <MagicComponent store={store} />,
                 document.getElementById(id));
         }
     }

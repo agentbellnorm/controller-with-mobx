@@ -9,7 +9,6 @@ type Controller = {
 
 export default ({ id }: { id: string }): Controller => {
     const store = new Bucket<core.State>(core.getInitialState());
-    store.onChange((state: core.State) => console.log('state change', state));
     
     const view = viewMaker({
         store,
