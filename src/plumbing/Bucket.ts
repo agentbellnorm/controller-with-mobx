@@ -1,13 +1,16 @@
-import { makeAutoObservable, reaction, action, autorun} from 'mobx';
+import { makeAutoObservable, autorun, action, runInAction} from 'mobx';
 
 export default class Bucket<T> {
-    state: T; 
+    state!: T; 
 
     constructor(initialState: T) {
         makeAutoObservable(this, {}, {deep: true});
-        this.state = initialState
+        runInAction(() => {
+            this.state = initialState;
+        });
     }
 
+    @action
     reset(newValue: T): T {
         this.state = newValue;
         return this.state;

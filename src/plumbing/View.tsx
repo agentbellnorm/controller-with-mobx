@@ -1,8 +1,7 @@
 import React from 'react';
-import { createElement as e } from 'react';
 import ReactDOM from 'react-dom';
 import Bucket from "./Bucket"
-import { Observer, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 
 interface Props {
     state: any;

@@ -4,7 +4,7 @@ import viewMaker from '../../plumbing/View';
 import * as core from './core';
 
 type Controller = {
-    render: Function;
+    render: () => void;
 }
 
 export default ({ id }: { id: string }): Controller => {
