@@ -1,26 +1,27 @@
-import { makeAutoObservable, reaction , observable} from 'mobx';
+import { makeAutoObservable, reaction, action, autorun} from 'mobx';
 
-export default class Bucket {
-    state: any = {};
+export default class Bucket<T> {
+    state: T; 
 
-    constructor(initialState: any) {
-        makeAutoObservable(this);
+    constructor(initialState: T) {
+        makeAutoObservable(this, {}, {deep: true});
         this.state = initialState
     }
 
-    swap(newState: any) {
-        console.log('oldstate', this.state);
-        console.log('newstate', newState);
-        this.state = newState;
+    reset(newValue: T): T {
+        this.state = newValue;
+        return this.state;
     }
 
-    onChange(effect?: Function) {
-        reaction(() => this.state,
-            state => {
-                if (effect) {
-                    effect(state);
-                }
-            },
-            { fireImmediately: true });
+    swap(swapFunction: (state: T, ...rest: any[]) => T, ...args: any[]) {
+        return this.reset(swapFunction.apply(null, [this.state, ...args]));
+    }
+
+    deref(): T {
+        return this.state;
+    }
+
+    onChange(listener: (state: T) => void) {
+        autorun(() => listener(this.state));
     }
 }
