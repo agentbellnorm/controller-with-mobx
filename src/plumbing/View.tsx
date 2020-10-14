@@ -13,7 +13,7 @@ const viewMaker = ({ store, Component }: { store: Bucket<any>, Component: any })
     return {
         mount: (id: string) => {
             ReactDOM.render(
-                <Wrapped state={store.state} swap={store.swap.bind(store)} />,
+                <Wrapped store={store} />,
                 document.getElementById(id));
         }
     }

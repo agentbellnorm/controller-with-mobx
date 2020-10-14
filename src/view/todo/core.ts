@@ -9,7 +9,7 @@ export const getInitialState = (): State => {
     return { 
         todos: ['tvätta', 'diska'],
         todoInputValue: '',
-        header: 'Attgöra',
+        header: 'Att Göra',
         doneTodos: [],
      };
 }

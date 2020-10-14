@@ -1,15 +1,18 @@
 import React from 'react';
+import magic from '../../plumbing/Magic'
 import * as core from './core';
 
-const TodoHistory = ({ state, swap }: { state: core.State, swap: Function }) => {
+const TodoHistory = ({ store }: { store: any }) => {
+    console.log('TodoHistory, render');
+    
     return (
         <>
             <h2>Färdiga</h2>
             <ul>
-                {state.doneTodos.map((done: string) => 
+                {store.state.doneTodos.map((done: string) => 
                 <li key={done}>
                     {done}
-                    <button onClick={() => swap(core.removeDone, done)}>
+                    <button onClick={() => store.swap(core.removeDone, done)}>
                         <span role="img" aria-label="remove">❌</span>
                     </button>
                 </li>)}
@@ -18,4 +21,4 @@ const TodoHistory = ({ state, swap }: { state: core.State, swap: Function }) => 
     );
 }
 
-export default TodoHistory
+export default magic(TodoHistory);
