@@ -1,5 +1,9 @@
 import { makeAutoObservable, autorun, runInAction} from 'mobx';
 
+interface SwapFunction<G> {
+    (state: G, ...rest: any[]): G
+}
+
 export default class Bucket<T> {
     state!: T; 
 
@@ -15,7 +19,7 @@ export default class Bucket<T> {
         return this.state;
     }
 
-    swap(swapFunction: (state: T, ...rest: any[]) => T, ...args: any[]) {
+    swap(swapFunction: SwapFunction<T>, ...args: any[]) {
         return this.reset(swapFunction.apply(null, [this.state, ...args]));
     }
 
@@ -23,7 +27,6 @@ export default class Bucket<T> {
         return this.state;
     }
 
-    // TODO not working..
     onChange(listener: (state: T) => void) {
         autorun(() => listener(this.state));
     }

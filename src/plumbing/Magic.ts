@@ -1,4 +1,4 @@
-import {observer} from 'mobx-react'
+import {observer} from 'mobx-react-lite'
 
 const magic = (Component: any) => observer(Component);
 
