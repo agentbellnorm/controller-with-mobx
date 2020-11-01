@@ -1,16 +1,16 @@
-import { makeAutoObservable, autorun, runInAction} from 'mobx';
+import { makeAutoObservable, autorun, runInAction } from 'mobx';
 
-interface SwapFunction<G> {
+export interface SwapFunction<G> {
     (state: G, ...rest: any[]): G
 }
 
 export default class Bucket<T> {
-    state!: T; 
+    state!: T;
 
     constructor(initialState: T) {
-        makeAutoObservable(this, {}, {deep: true});
+        makeAutoObservable(this, {}, { deep: true });
         runInAction(() => {
-            this.state = initialState;
+            this.reset(initialState);
         });
     }
 
@@ -19,8 +19,9 @@ export default class Bucket<T> {
         return this.state;
     }
 
-    swap(swapFunction: SwapFunction<T>, ...args: any[]) {
-        return this.reset(swapFunction.apply(null, [this.state, ...args]));
+    swap(swapFunction: SwapFunction<T>, ...args: any[]): T {
+        const newState = swapFunction.apply(null, [this.state, ...args]);
+        return this.reset(newState);
     }
 
     deref(): T {

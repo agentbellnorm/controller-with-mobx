@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Todo renders 1`] = `
+<React.Fragment>
+  <h2>
+    Att Göra
+  </h2>
+  <input
+    onChange={[Function]}
+    value=""
+  />
+  <button
+    onClick={[Function]}
+  >
+    Add Item
+  </button>
+  <ul />
+  <UNDEFINED />
+</React.Fragment>
+`;

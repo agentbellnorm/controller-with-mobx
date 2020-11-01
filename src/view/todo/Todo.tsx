@@ -1,11 +1,13 @@
 import React from 'react';
 import Bucket from '../../plumbing/Bucket';
-import * as core from './core'
-import TodoHistory from './TodoHistory';
+import magic from '../../plumbing/Magic';
+import * as core from './core';
+import todoHistoryMaker from './TodoHistory';
 
 const todoMaker = (store: Bucket<core.State>) => {
+    const TodoHistory = todoHistoryMaker(store);
+
     const Todo = () => {
-        console.log('Todo render');
         return (
             <>
                 <h2>{store.state.header}</h2>
@@ -15,17 +17,17 @@ const todoMaker = (store: Bucket<core.State>) => {
                 <button onClick={() => store.swap(core.addItem)}>Add Item</button>
                 <ul>
                     {store.state.todos.map((todo: string) => (
-                        <li key={todo}>
+                        <li role="todo-item" key={todo}>
                             {todo}
                             <button onClick={() => store.swap(core.markAsDone, todo)}><span role="img" aria-label="check">✅</span></button>
                         </li>
                     ))}
                 </ul>
-                <TodoHistory store={store} />
+                <TodoHistory />
             </>);
     }
 
-    return Todo;
+    return magic(Todo);
 }
 
 export default todoMaker;

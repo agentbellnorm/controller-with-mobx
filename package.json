@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
@@ -15,8 +15,13 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
-    "typescript": "~3.7.2"
+    "typescript": "4.0.3"
   },
+  "devDependencies": {
+    "@types/react-test-renderer": "^16.9.3",
+    "react-test-renderer": "^17.0.1"
+  },
+  "proxy": "https://jsonplaceholder.typicode.com/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

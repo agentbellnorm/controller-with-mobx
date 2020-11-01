@@ -1,5 +1,5 @@
 import Bucket from './Bucket';
-import { autorun } from 'mobx';
+import { autorun, action } from 'mobx';
 
 type State = {
     key: string;
@@ -37,6 +37,19 @@ describe('Bucket', () => {
         expect(spy).toHaveBeenNthCalledWith(1, { key: 'value lol wut' });
     })
 
+    it('swapfunction can return new object, still triggers onchange', () => {
+        const bucket = new Bucket<State>({ key: 'value' });
+        const appendFunc = (state: State, a1: string, a2: string): State => {
+            return { key: state.key + a1 + a2 };
+        }
+
+        const spy = jest.fn()
+        bucket.onChange(spy);
+        expect(spy).toHaveBeenNthCalledWith(1, { key: 'value' });
+        bucket.swap(appendFunc, ' lol', ' wut');
+        expect(spy).toHaveBeenNthCalledWith(2, { key: 'value lol wut' });
+    })
+
     it('multiple swaps are batched', () => {
         type DigitState = { digit: number };
         const setNumber = (state: DigitState, number: number): DigitState => {
@@ -67,16 +80,14 @@ describe('Bucket', () => {
         }
 
         const bucket = new Bucket<DeepState>({ step1: { step2: { items: [1, 2, 3, 4, 5] } } });
-        const spy = jest.fn()
+        const spy = jest.fn();
 
-        const disposer = autorun(() => spy(getEven(bucket.state)))
+        autorun(() => spy(getEven(bucket.state)))
+        expect(spy).toHaveBeenNthCalledWith(1, [2, 4]);
 
         bucket.swap(addItem, 6)
 
-        disposer();
-
         expect(spy).toHaveBeenCalledTimes(2);
-        expect(spy).toHaveBeenNthCalledWith(1, [2, 4]);
         expect(spy).toHaveBeenNthCalledWith(2, [2, 4, 6]);
     });
 
@@ -137,11 +148,12 @@ describe('Bucket', () => {
 
         const bananaDisposer = autorun(() => bananaSpy(getBananaPreference(bucket.state)));
         const tomatoDisposer = autorun(() => tomatoSpy(getTomatoPreference(bucket.state)));
-        
+
         bucket.swap(setBananaPreference, 'yum');
 
         expect(bananaSpy).toHaveBeenNthCalledWith(1, 'yuck');
         expect(bananaSpy).toHaveBeenNthCalledWith(2, 'yum');
+        expect(bananaSpy).toHaveBeenCalledTimes(2);
 
         expect(tomatoSpy).toHaveBeenNthCalledWith(1, 'yuck');
         expect(tomatoSpy).toHaveBeenCalledTimes(1);

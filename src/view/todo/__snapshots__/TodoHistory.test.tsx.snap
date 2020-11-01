@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoHistory items in list 1`] = `
+<React.Fragment>
+  <h2>
+    Färdiga
+  </h2>
+  <ul>
+    <li
+      role="done-item"
+    >
+      vacuum
+      <button
+        onClick={[Function]}
+      >
+        <span
+          aria-label="remove"
+          role="img"
+        >
+          ❌
+        </span>
+      </button>
+    </li>
+    <li
+      role="done-item"
+    >
+      get food
+      <button
+        onClick={[Function]}
+      >
+        <span
+          aria-label="remove"
+          role="img"
+        >
+          ❌
+        </span>
+      </button>
+    </li>
+  </ul>
+</React.Fragment>
+`;
+
+exports[`TodoHistory renders 1`] = `
+<React.Fragment>
+  <h2>
+    Färdiga
+  </h2>
+  <ul />
+</React.Fragment>
+`;

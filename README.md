@@ -1,3 +1,7 @@
+## Description
+This is a tiny proof of concept of ideas expressed in this blog post.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

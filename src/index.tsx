@@ -10,9 +10,9 @@ configure({
     observableRequiresReaction: true,
 })
 
+const rootElementId = 'root';
 
-
-const todoController = todoControllerMaker({id: 'root'});
+const todoController = todoControllerMaker({id: rootElementId});
 todoController.render();
 
 // If you want your app to work offline and load faster, you can change
