@@ -1,5 +1,5 @@
 ## Description
-This is a tiny proof of concept of ideas expressed in this blog post.
+This is a tiny proof of concept of ideas expressed in [this blog post](https://morganbentell.wordpress.com/2020/11/01/mobx-is-not-a-framework/).
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
